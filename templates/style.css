@@ -1,0 +1,167 @@
+.container {
+    margin-top: 1rem;
+}
+
+h1, h2, h3, h4, a {
+    color: #1d4ed8;
+}
+
+a, a.pure-button:hover {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+.devplan-row h4 {
+    margin-top: 0.1rem;
+}
+
+.devplan-row {
+    margin-bottom: 2rem;
+}
+
+.devplan {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.devplan-button {
+    margin-right: 1rem;
+}
+
+.upload, .batch {
+    background-color: #eff6ff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.upload-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-logo, .batch-logo {
+    height: 20vh;
+    margin-bottom: 1rem;
+}
+
+.upload-button, .batch-button {
+    background-color: #bfdbfe;
+}
+
+.button-xlarge {
+    font-size: 125%;
+}
+
+.main_col {
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    align-items: center;
+}
+
+.main_col img {
+    align-self: center;
+    height: auto;
+    max-width: 300px;
+}
+
+.pure-button {
+    border-radius: .5rem;
+    display: block;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.batch-item {
+    display: block;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    position: relative;
+}
+
+.upload-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upload-file-input {
+    max-width: 100%;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.upload-page .logo {
+    width: 400px;
+    max-width: 400px;
+}
+
+.batch-select-indicator {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid #fff;
+    border-radius: .5rem;
+    transition: border-color .25s;
+}
+
+.batch-item input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"]:checked + .batch-select-indicator {
+    border-color: #0078e7;
+}
+
+.batch-item-title {
+    padding-right: 0.5rem;
+}
+
+.batch-item-badge-new {
+    color: #1d4ed8;
+}
+
+.batch-item-badge-existing {
+    color: #777;
+}
+
+[class|="batch-item-badge"] {
+    font-size: .9rem;
+    font-style: italic;
+}
+
+.batch-form {
+    margin-left: -1rem;
+}
+
+.batch-actions-use-cache {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.devplan-img {
+    border: 1px dashed #1d4ed8;
+}
+
+.batch-form-buttons {
+    display: flex;
+}
+
+.batch-form-buttons .pure-button {
+    margin-right: 1rem;
+    width: auto;
+}
