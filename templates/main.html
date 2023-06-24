@@ -33,17 +33,7 @@
                                 <p>Загружен {{ f.date }}</p>
                             </div>
                             <div class="devplan-footer">
-                            {% if f.status == "not_parsed" %}
                                 <a class="devplan-button" href="{{ f.urls.parse }}">Проанализировать</a>
-                            {% else %}
-                                <a class="devplan-button" href="{{ f.urls.view }}">Открыть</a>
-                                <span class="devplan-button">
-                                    Скачать:
-                                    {% for key, value in f.urls.download.items() %}
-                                    <a href="{{ value }}">{{ key }}</a>
-                                    {% endfor %}
-                                </span>
-                                {% endif %}
                                 <a class="devplan-button" href="{{ f.urls.delete }}">Удалить</a>
                             </div>
                         </div>
@@ -55,10 +45,6 @@
                 <div class="upload">
                     <img class="upload-logo" src="{{ url_for('templates', path='/upload.png') }}" alt="">
                     <a href="upload" class="button-xlarge pure-button pure-button-primary">Добавить новый файл</a>
-                </div>
-                <div class="batch">
-                    <img class="batch-logo" src="{{ url_for('templates', path='/batch.png') }}" alt="">
-                    <a href="batch" class="button-xlarge pure-button pure-button-primary">Пакетная обработка</a>
                 </div>
             </div>
             <div class="pure-u-1-24"></div>

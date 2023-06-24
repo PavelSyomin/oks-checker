@@ -53,10 +53,19 @@ async def view(request: Request, file_name: str):
     data = get_file_urls(file_name)
     return templates.TemplateResponse("view.html", {"request": request, "data": data})
 
-@app.get("/parse")
-async def parse(request: Request, file_name: str, background_tasks: BackgroundTasks):
-    background_tasks.add_task(parse_and_save_file, file_name, file_type="json")
-    return RedirectResponse(f"/view?file_name={file_name}", status_code=302)
+@app.get("/analyze")
+async def analyze(request: Request, file_name: str):
+    data = {
+        "file_name": file_name,
+    }
+    return templates.TemplateResponse("analyze.html", {"request": request, "data":
+        data})
+
+@app.get("/result")
+async def result(request: Request, file_name: str, search: str, background_tasks: BackgroundTasks):
+    data = parse_and_save_file(file_name, search)
+
+    return templates.TemplateResponse("result.html", {"request": request, "data": data})
 
 @app.get("/download")
 async def download(request: Request, file_name: str, file_type: str):
@@ -272,7 +281,7 @@ def get_file_urls(file_name):
 
     return {
         "view": f"view?file_name={name}",
-        "parse": f"parse?file_name={name}",
+        "parse": f"analyze?file_name={name}",
         "download": {
             "json": f"download?file_name={name}&file_type=json",
             "xlsx": f"download?file_name={name}&file_type=xlsx",
@@ -280,16 +289,21 @@ def get_file_urls(file_name):
         "delete": f"delete?file_name={name}",
     }
 
-def parse_and_save_file(file_name, file_type="json", use_cache=True):
+def parse_and_save_file(file_name, search, file_type="json", use_cache=True):
     parser = Parser(use_cache)
     pdf_path = pathlib.Path(folders["pdf"]) / f"{file_name}.pdf"
 
     if not pdf_path.is_file():
         return None
 
+    if search is None:
+        return None
+
+    search_strings = search.splitlines()
+
     try:
         parser.load_pdf(str(pdf_path))
-        parser.parse()
+        parser.parse(search_strings)
         result = parser.get_result()
     except Exception as e:
         print(print(traceback.format_exc()))
@@ -300,7 +314,7 @@ def parse_and_save_file(file_name, file_type="json", use_cache=True):
     elif file_type == "xlsx":
         out_path = save_excel(file_name, result)
 
-    return str(out_path)
+    return result
 
 def save_json(file_name, result):
     tmp_dir = pathlib.Path(folders["tmp"])
